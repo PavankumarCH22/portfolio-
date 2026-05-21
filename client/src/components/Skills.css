@@ -1,0 +1,113 @@
+.skills__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.skill-group {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  transition: border-color 0.2s;
+}
+
+.skill-group:hover {
+  border-color: var(--border-hover);
+}
+
+.skill-group__title {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+
+.skill-group__bars {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.skill-bar__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.45rem;
+}
+
+.skill-bar__name {
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.skill-bar__pct {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.skill-bar__track {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.skill-bar__fill {
+  height: 100%;
+  border-radius: 99px;
+  background: var(--fill-color, var(--accent));
+  width: 0;
+  animation: growBar 1s ease forwards;
+  animation-delay: 0.3s;
+}
+
+@keyframes growBar {
+  from { width: 0; }
+  to { width: var(--fill-width, 50%); }
+}
+
+.skills__learning {
+  margin-top: 3rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.skills__learning-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.skills__learning-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.learning-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(62, 207, 142, 0.08);
+  border: 1px solid rgba(62, 207, 142, 0.15);
+  color: var(--green);
+  padding: 0.4rem 1rem;
+  border-radius: 99px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.learning-tag__dot {
+  width: 6px;
+  height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+}
