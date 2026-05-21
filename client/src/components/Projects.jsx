@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Folder, Github, ExternalLink, Filter, X, Terminal, Server, Cpu } from 'lucide-react';
 import './Projects.css';
 
 const FALLBACK_PROJECTS = [
@@ -9,41 +10,83 @@ const FALLBACK_PROJECTS = [
       'End-to-end web application built with MongoDB, Express.js, React, and Node.js. Developed RESTful APIs for smooth client-server communication with dynamic component-based React front-end.',
     techStack: ['MongoDB', 'Express.js', 'React', 'Node.js'],
     githubUrl: 'https://github.com/PavankumarCH22',
+    liveUrl: 'https://github.com/PavankumarCH22',
     featured: true,
+    setup: 'npm run install:all && npm run dev',
+    architecture: 'MERN architecture with client-side proxy routing and Express routing controllers.',
+    learnings: 'Engineered robust database models, handled API payloads securely, and configured CORS proxies for smooth React-to-node connectivity.'
   },
   {
     _id: '2',
-    title: 'Personal Portfolio',
+    title: 'Personal Developer Portfolio',
     description:
-      'Responsive portfolio website showcasing projects, skills, and contact. Built with React and deployed on Vercel with smooth animations and dark theme.',
-    techStack: ['React', 'CSS', 'Vite', 'Vercel'],
+      'Responsive portfolio website showcasing projects, skills, and contact. Built with React and deployed on Vercel with smooth animations, dark space theme, and high-performance serverless endpoints.',
+    techStack: ['React', 'CSS', 'Vite', 'Vercel', 'MongoDB'],
     githubUrl: 'https://github.com/PavankumarCH22',
+    liveUrl: 'https://github.com/PavankumarCH22',
     featured: true,
+    setup: 'cd client && npm install && npm run build',
+    architecture: 'Single-project Vercel monorepo mapping static assets and Express serverless functions concurrently.',
+    learnings: 'Mastered glassmorphism design tokens, engineered real-time database state sync, and refined clean CSS keyframes.'
   },
   {
     _id: '3',
     title: 'Frontend UI Projects',
     description:
-      'Collection of front-end projects applying HTML, CSS, and JavaScript to build clean, user-friendly interfaces with modern design patterns.',
+      'Collection of front-end projects applying HTML, CSS, and JavaScript to build clean, user-friendly interfaces with modern design patterns and pixel-perfect layouts.',
     techStack: ['HTML', 'CSS', 'JavaScript'],
     githubUrl: 'https://github.com/PavankumarCH22',
+    liveUrl: 'https://github.com/PavankumarCH22',
     featured: false,
+    setup: 'open index.html in browser',
+    architecture: 'Pure semantic HTML5 layout with vanilla CSS custom properties and pure Javascript event emitters.',
+    learnings: 'Perfected flexbox/grid alignments, studied performance paint layers, and crafted clean visual micro-interactions.'
   },
 ];
+
+const categories = ['All', 'MERN', 'React', 'Frontend'];
 
 export default function Projects() {
   const [projects, setProjects] = useState(FALLBACK_PROJECTS);
   const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState('All');
+  const [selectedProject, setSelectedProject] = useState(null);
 
   useEffect(() => {
     fetch('/api/projects')
       .then(r => r.json())
       .then(d => {
-        if (d.success && d.data.length > 0) setProjects(d.data);
+        if (d.success && d.data.length > 0) {
+          // Map default seed setup/architecture fields to API projects if not exist
+          const mapped = d.data.map(p => ({
+            ...p,
+            setup: p.setup || 'npm install && npm run dev',
+            architecture: p.architecture || 'Three-tier architecture modeling Express API controllers and MongoDB schemas.',
+            learnings: p.learnings || 'Established secure REST routes, configured database connection pipelines, and validated inputs.'
+          }));
+          setProjects(mapped);
+        }
       })
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
+
+  const getCategory = (techs) => {
+    if (!techs) return 'Frontend';
+    const lowerTechs = techs.map(t => t.toLowerCase());
+    if (lowerTechs.includes('mongodb') && lowerTechs.includes('express.js') && lowerTechs.includes('node.js')) {
+      return 'MERN';
+    }
+    if (lowerTechs.includes('react') || lowerTechs.includes('react.js')) {
+      return 'React';
+    }
+    return 'Frontend';
+  };
+
+  const filteredProjects = projects.filter(p => {
+    if (filter === 'All') return true;
+    return getCategory(p.techStack) === filter;
+  });
 
   return (
     <section className="section projects" id="projects">
@@ -51,8 +94,22 @@ export default function Projects() {
         <p className="section-label">Projects</p>
         <h2 className="section-title">Things I've built</h2>
         <p className="projects__sub">
-          Real applications built from scratch — not just tutorials.
+          Real full-stack and UI solutions built from scratch — demonstrating core engineering capabilities.
         </p>
+
+        {/* Filter Category Tabs */}
+        <div className="projects__filters animate-fadeUp">
+          <Filter size={14} className="filter-icon" />
+          {categories.map(cat => (
+            <button
+              key={cat}
+              className={`filter-tab ${filter === cat ? 'filter-tab--active' : ''}`}
+              onClick={() => setFilter(cat)}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
 
         {loading ? (
           <div className="projects__loading">
@@ -60,40 +117,51 @@ export default function Projects() {
           </div>
         ) : (
           <div className="projects__grid">
-            {projects.map((p, i) => (
-              <ProjectCard key={p._id} project={p} index={i} />
+            {filteredProjects.map((p, i) => (
+              <ProjectCard 
+                key={p._id} 
+                project={p} 
+                index={i} 
+                onSelect={() => setSelectedProject(p)} 
+              />
             ))}
           </div>
         )}
       </div>
+
+      {/* Details Popup Modal */}
+      {selectedProject && (
+        <ProjectModal 
+          project={selectedProject} 
+          onClose={() => setSelectedProject(null)} 
+        />
+      )}
     </section>
   );
 }
 
-function ProjectCard({ project, index }) {
+function ProjectCard({ project, index, onSelect }) {
   return (
-    <article className={`project-card ${project.featured ? 'project-card--featured' : ''}`}>
-      {project.featured && <span className="project-card__badge">Featured</span>}
+    <article 
+      className={`project-card glass-panel ${project.featured ? 'project-card--featured' : ''} animate-fadeUp`}
+      style={{ animationDelay: `${index * 0.1}s` }}
+      onClick={onSelect}
+    >
+      {project.featured && <span className="project-card__badge">Featured App</span>}
 
       <div className="project-card__header">
         <div className="project-card__folder">
-          <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-            <path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" />
-          </svg>
+          <Folder size={28} strokeWidth={1.5} />
         </div>
-        <div className="project-card__links">
+        <div className="project-card__links" onClick={e => e.stopPropagation()}>
           {project.githubUrl && (
             <a href={project.githubUrl} target="_blank" rel="noreferrer" aria-label="GitHub">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12c0-5.523-4.477-10-10-10z" />
-              </svg>
+              <Github size={18} />
             </a>
           )}
           {project.liveUrl && (
             <a href={project.liveUrl} target="_blank" rel="noreferrer" aria-label="Live demo">
-              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                <path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
+              <ExternalLink size={18} />
             </a>
           )}
         </div>
@@ -103,10 +171,86 @@ function ProjectCard({ project, index }) {
       <p className="project-card__desc">{project.description}</p>
 
       <div className="project-card__tags">
-        {project.techStack?.map(t => (
+        {project.techStack?.slice(0, 4).map(t => (
           <span key={t} className="project-card__tag">{t}</span>
         ))}
+        {project.techStack?.length > 4 && (
+          <span className="project-card__tag-more">+{project.techStack.length - 4} more</span>
+        )}
+      </div>
+
+      <div className="project-card__footer">
+        <button className="project-card__btn-more">View details & architecture ↗</button>
       </div>
     </article>
+  );
+}
+
+function ProjectModal({ project, onClose }) {
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content glass-panel" onClick={e => e.stopPropagation()}>
+        <button className="modal-close" onClick={onClose} aria-label="Close modal">
+          <X size={20} />
+        </button>
+
+        <div className="modal-header">
+          <p className="modal-subtitle">Project Case Study</p>
+          <h3 className="modal-title">{project.title}</h3>
+        </div>
+
+        <div className="modal-body">
+          <div className="modal-desc-section">
+            <p className="modal-desc">{project.description}</p>
+            
+            <div className="modal-detail-row">
+              <Terminal size={16} className="modal-row-icon" />
+              <div>
+                <p className="modal-row-label">Build / Setup command</p>
+                <code className="modal-code">{project.setup}</code>
+              </div>
+            </div>
+
+            <div className="modal-detail-row">
+              <Server size={16} className="modal-row-icon" />
+              <div>
+                <p className="modal-row-label">System Architecture</p>
+                <p className="modal-row-text">{project.architecture}</p>
+              </div>
+            </div>
+
+            <div className="modal-detail-row">
+              <Cpu size={16} className="modal-row-icon" />
+              <div>
+                <p className="modal-row-label">Core Learnings</p>
+                <p className="modal-row-text">{project.learnings}</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="modal-sidebar">
+            <p className="sidebar-label">Technologies Used</p>
+            <div className="sidebar-tags">
+              {project.techStack?.map(t => (
+                <span key={t} className="sidebar-tag">{t}</span>
+              ))}
+            </div>
+
+            <div className="sidebar-links">
+              {project.githubUrl && (
+                <a href={project.githubUrl} target="_blank" rel="noreferrer" className="btn-primary sidebar-btn">
+                  <Github size={16} /> Repository
+                </a>
+              )}
+              {project.liveUrl && (
+                <a href={project.liveUrl} target="_blank" rel="noreferrer" className="btn-outline sidebar-btn">
+                  <ExternalLink size={16} /> Live Demo
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

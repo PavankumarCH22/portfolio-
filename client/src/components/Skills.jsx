@@ -1,51 +1,54 @@
+import { Terminal, Layout, Database, Wrench, Sparkles } from 'lucide-react';
 import './Skills.css';
 
 const skillGroups = [
   {
     category: 'Languages & Core',
-    color: 'accent',
+    icon: Terminal,
+    color: '#7c4dff',
     skills: [
-      { name: 'JavaScript', level: 85 },
-      { name: 'HTML/CSS', level: 90 },
-      { name: 'Java', level: 45 },
+      { name: 'JavaScript (ES6+)', level: 85 },
+      { name: 'HTML5 & CSS3', level: 90 },
+      { name: 'Java', level: 60 },
     ],
   },
   {
-    category: 'Frontend',
-    color: 'green',
+    category: 'Frontend Development',
+    icon: Layout,
+    color: '#00e676',
     skills: [
-      { name: 'React.js', level: 82 },
-      { name: 'Responsive Design', level: 88 },
+      { name: 'React.js & Hooks', level: 82 },
+      { name: 'Responsive UI Design', level: 88 },
     ],
   },
   {
-    category: 'Backend & DB',
-    color: 'amber',
+    category: 'Backend & Databases',
+    icon: Database,
+    color: '#2979ff',
     skills: [
       { name: 'Node.js', level: 78 },
       { name: 'Express.js', level: 78 },
-      { name: 'MongoDB', level: 75 },
+      { name: 'MongoDB & Mongoose', level: 75 },
     ],
   },
   {
-    category: 'Tools',
-    color: 'pink',
+    category: 'Tools & DevOps',
+    icon: Wrench,
+    color: '#ff4081',
     skills: [
-      { name: 'Git & GitHub', level: 80 },
-      { name: 'VS Code', level: 95 },
-      { name: 'REST APIs', level: 80 },
+      { name: 'Git & GitHub Workflows', level: 80 },
+      { name: 'VS Code & Debugging', level: 95 },
+      { name: 'REST APIs & Postman', level: 80 },
     ],
   },
 ];
 
-const colorMap = {
-  accent: '#6c63ff',
-  green: '#3ecf8e',
-  amber: '#f59e0b',
-  pink: '#ec4899',
-};
-
-const learning = ['Machine Learning', 'Artificial Intelligence', 'Java (Advanced)', 'DSA'];
+const learning = [
+  'Machine Learning Models',
+  'Neural Networks & AI',
+  'Advanced Data Structures',
+  'Advanced Java (Spring Boot)'
+];
 
 export default function Skills() {
   return (
@@ -55,36 +58,35 @@ export default function Skills() {
         <h2 className="section-title">What I work with</h2>
 
         <div className="skills__grid">
-          {skillGroups.map(g => (
-            <div key={g.category} className="skill-group">
-              <h3 className="skill-group__title" style={{ color: colorMap[g.color] }}>
-                {g.category}
-              </h3>
-              <div className="skill-group__bars">
-                {g.skills.map(s => (
-                  <div key={s.name} className="skill-bar">
-                    <div className="skill-bar__header">
-                      <span className="skill-bar__name">{s.name}</span>
-                      <span className="skill-bar__pct">{s.level}%</span>
-                    </div>
-                    <div className="skill-bar__track">
-                      <div
-                        className="skill-bar__fill"
-                        style={{
-                          '--fill-width': `${s.level}%`,
-                          '--fill-color': colorMap[g.color],
-                        }}
-                      />
-                    </div>
+          {skillGroups.map((g, gi) => {
+            const Icon = g.icon;
+            return (
+              <div key={g.category} className="skill-group glass-panel animate-fadeUp" style={{ animationDelay: `${gi * 0.1}s` }}>
+                <div className="skill-group__header" style={{ '--group-color': g.color }}>
+                  <div className="skill-group__icon-wrapper">
+                    <Icon size={18} className="skill-group__icon" />
                   </div>
-                ))}
+                  <h3 className="skill-group__title">{g.category}</h3>
+                </div>
+                
+                <div className="skill-group__tags">
+                  {g.skills.map(s => (
+                    <span key={s.name} className="skill-badge" style={{ '--badge-color': g.color }}>
+                      {s.name}
+                      <span className="skill-badge__pct">{s.level}%</span>
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        <div className="skills__learning">
-          <p className="skills__learning-label">Currently learning</p>
+        <div className="skills__learning glass-panel animate-fadeUp">
+          <div className="skills__learning-header">
+            <Sparkles size={16} className="skills__learning-icon" />
+            <p className="skills__learning-label">Currently exploring & learning</p>
+          </div>
           <div className="skills__learning-tags">
             {learning.map(l => (
               <span key={l} className="learning-tag">

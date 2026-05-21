@@ -1,7 +1,11 @@
 .footer {
-  border-top: 1px solid var(--border);
-  padding: 2.5rem 0;
-  margin-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 3.5rem 0;
+  margin-top: 5rem;
+  background: rgba(3, 3, 7, 0.8);
+  backdrop-filter: blur(16px);
+  position: relative;
+  z-index: 10;
 }
 
 .footer__inner {
@@ -9,40 +13,48 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .footer__logo {
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: 1.35rem;
   font-weight: 800;
   color: var(--text-primary);
+  display: flex;
+  align-items: center;
 }
 
 .footer__copy {
-  font-size: 0.8rem;
+  font-size: 0.825rem;
   color: var(--text-muted);
+  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 .footer__links {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.75rem;
 }
 
 .footer__links a {
-  font-size: 0.8rem;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 600;
   color: var(--text-muted);
   text-decoration: none;
-  transition: color 0.2s;
+  transition: var(--transition);
 }
 
 .footer__links a:hover {
   color: var(--accent-light);
+  transform: translateY(-1px);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .footer__inner {
     flex-direction: column;
     text-align: center;
+    gap: 2rem;
   }
 }
