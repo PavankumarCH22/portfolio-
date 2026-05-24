@@ -302,6 +302,64 @@
   white-space: pre-wrap;
 }
 
+.message-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-icon-delete {
+  background: rgba(255, 64, 129, 0.05);
+  border: 1px solid rgba(255, 64, 129, 0.15);
+  color: var(--pink);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-icon-delete:hover {
+  background: var(--pink);
+  color: #030307;
+  border-color: transparent;
+  transform: scale(1.08);
+  box-shadow: 0 4px 15px rgba(255, 64, 129, 0.3);
+}
+
+.featured-tag {
+  background: var(--accent-dim);
+  border: 1px solid rgba(124, 77, 255, 0.2);
+  color: var(--accent-light);
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 99px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: inline-block;
+}
+
+.project-tag-pill {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  font-weight: 550;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+.project-tag-pill:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
 .workspace-loader {
   display: flex;
   flex-direction: column;
