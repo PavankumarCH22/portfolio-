@@ -183,3 +183,12 @@
     padding: 2rem;
   }
 }
+
+@media (max-width: 480px) {
+  .contact__form-wrapper {
+    padding: 1.25rem;
+  }
+  .contact__submit {
+    padding: 0.85rem 1.5rem;
+  }
+}

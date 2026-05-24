@@ -361,3 +361,9 @@ body::after {
   .container { padding: 0 1.5rem; }
   .section { padding: 5rem 0; }
 }
+
+@media (max-width: 480px) {
+  .container { padding: 0 1rem; }
+  .section { padding: 4rem 0; }
+  .section-title { font-size: clamp(1.8rem, 6vw, 2.4rem); }
+}

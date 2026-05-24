@@ -180,3 +180,18 @@
     margin-top: 1rem;
   }
 }
+
+.navbar__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 3, 7, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 999;
+  animation: fadeInNavbarOverlay 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+@keyframes fadeInNavbarOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

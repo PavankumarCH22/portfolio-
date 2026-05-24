@@ -155,7 +155,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 520px) {
   .about__highlights {
     grid-template-columns: 1fr;
   }
