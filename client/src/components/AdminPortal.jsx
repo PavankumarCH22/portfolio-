@@ -3,7 +3,7 @@ import { Sliders, Database, Inbox, Plus, RefreshCw, X, ShieldCheck, Mail, Calend
 import './AdminPortal.css';
 
 export default function AdminPortal() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(window.location.pathname === '/admin' || window.location.hash === '#admin');
   const [activeTab, setActiveTab] = useState('inbox'); // inbox | seed | add-project | manage-projects
   const [dbConnected, setDbConnected] = useState(false);
   const [messages, setMessages] = useState([]);
@@ -14,7 +14,7 @@ export default function AdminPortal() {
   const [submittingProject, setSubmittingProject] = useState(false);
 
   // Authentication State
-  const [showToggle, setShowToggle] = useState(window.location.hash === '#admin');
+  const [showToggle, setShowToggle] = useState(window.location.pathname === '/admin' || window.location.hash === '#admin');
   const [isAuthenticated, setIsAuthenticated] = useState(sessionStorage.getItem('portfolio_admin_token') === 'authenticated_portfolio_session');
   const [passwordInput, setPasswordInput] = useState('');
   const [authError, setAuthError] = useState('');
@@ -30,10 +30,14 @@ export default function AdminPortal() {
     featured: false
   });
 
-  // Check URL hash for admin keyword dynamically
+  // Check URL hash and pathname for admin keyword dynamically
   useEffect(() => {
     const checkHash = () => {
-      setShowToggle(window.location.hash === '#admin');
+      const isAdmin = window.location.pathname === '/admin' || window.location.hash === '#admin';
+      setShowToggle(isAdmin);
+      if (isAdmin) {
+        setIsOpen(true);
+      }
     };
     window.addEventListener('hashchange', checkHash);
     checkHash();
