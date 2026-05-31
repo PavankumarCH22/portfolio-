@@ -17,7 +17,7 @@ async function sendContactEmail(name, email, message) {
   const mailUser = process.env.SMTP_USER;
   const mailPass = process.env.SMTP_PASS;
 
-  if (!mailUser || !mailPass) {
+  if (!mailUser || !mailPass || mailPass.includes('xxxx')) {
     console.log('--------------------------------------------------');
     console.log('SIMULATED EMAIL NOTIFICATION (SMTP credentials missing):');
     console.log(`To: ${process.env.SMTP_TO || 'pavankumarch326@gmail.com'}`);
