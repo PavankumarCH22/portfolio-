@@ -106,6 +106,16 @@ const DEFAULT_PROJECTS = [
     githubUrl: 'https://github.com/PavankumarCH22',
     featured: false,
   },
+  {
+    _id: 'fallback-4',
+    title: 'Kandanavolu Paakashala',
+    description:
+      'A professional Andhra catering web application built for Kurnool-based catering services. Features dynamic multi-language (i18n) support (English, Telugu, Hindi), bespoke menu configurations, fluid animations, and an integrated reservation funnel.',
+    techStack: ['HTML5', 'CSS3', 'JavaScript', 'Firebase', 'i18n'],
+    githubUrl: 'https://github.com/PavankumarCH22',
+    liveUrl: 'https://kandanavolu-paakashala.firebaseapp.com/',
+    featured: true,
+  },
 ];
 
 const memoryMessages = [];

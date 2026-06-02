@@ -42,6 +42,19 @@ const FALLBACK_PROJECTS = [
     architecture: 'Pure semantic HTML5 layout with vanilla CSS custom properties and pure Javascript event emitters.',
     learnings: 'Perfected flexbox/grid alignments, studied performance paint layers, and crafted clean visual micro-interactions.'
   },
+  {
+    _id: '4',
+    title: 'Kandanavolu Paakashala',
+    description:
+      'A professional Andhra catering web application built for Kurnool-based catering services. Features dynamic multi-language (i18n) support (English, Telugu, Hindi), bespoke menu configurations, fluid animations, and an integrated reservation funnel.',
+    techStack: ['HTML5', 'CSS3', 'JavaScript', 'Firebase', 'i18n'],
+    githubUrl: 'https://github.com/PavankumarCH22',
+    liveUrl: 'https://kandanavolu-paakashala.firebaseapp.com/',
+    featured: true,
+    setup: 'npm install -g firebase-tools && firebase deploy',
+    architecture: 'Single-page application structured around modular semantic components, dynamically controlled language-switcher dictionary assets, responsive media, and automated Firebase Hosting routing pipelines.',
+    learnings: 'Engineered clean client-side dynamic i18n module systems, customized elegant vanilla CSS layout animations, and deployed high-performance global assets via Firebase CLI.'
+  },
 ];
 
 const categories = ['All', 'MERN', 'React', 'Frontend'];
