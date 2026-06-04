@@ -34,37 +34,190 @@ async function sendContactEmail(name, email, message) {
     to: process.env.SMTP_TO || mailUser,
     subject: `💼 Portfolio: New Contact Message from ${name}`,
     html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
-        <div style="background: linear-gradient(135deg, #7c4dff, #ff4081); padding: 24px; text-align: center; color: white;">
-          <h2 style="margin: 0; font-size: 24px;">New Contact Message Received</h2>
-          <p style="margin: 4px 0 0 0; opacity: 0.9;">Via your Portfolio Website</p>
-        </div>
-        <div style="padding: 24px; background-color: #fafafa;">
-          <table style="width: 100%; border-collapse: collapse;">
-            <tr>
-              <td style="padding: 8px 0; color: #666; font-weight: bold; width: 100px;">Sender Name:</td>
-              <td style="padding: 8px 0; color: #333;">${name}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0; color: #666; font-weight: bold;">Sender Email:</td>
-              <td style="padding: 8px 0; color: #333;"><a href="mailto:${email}" style="color: #7c4dff; text-decoration: none;">${email}</a></td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0; color: #666; font-weight: bold;">Received At:</td>
-              <td style="padding: 8px 0; color: #333;">${new Date().toLocaleString()}</td>
-            </tr>
-          </table>
-          <hr style="border: 0; border-top: 1px solid #eeeeee; margin: 20px 0;" />
-          <h4 style="color: #333; margin: 0 0 8px 0;">Message Content:</h4>
-          <div style="background-color: white; border: 1px solid #e0e0e0; border-radius: 6px; padding: 16px; color: #444; line-height: 1.6; white-space: pre-wrap;">${message}</div>
-          <div style="text-align: center; margin-top: 24px;">
-            <a href="mailto:${email}" style="display: inline-block; background-color: #7c4dff; color: white; padding: 12px 24px; border-radius: 4px; text-decoration: none; font-weight: bold; box-shadow: 0 4px 6px rgba(124, 77, 255, 0.2);">Reply to ${name}</a>
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>New Contact Message</title>
+        <style>
+          @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+          body {
+            margin: 0;
+            padding: 0;
+            background-color: #f3f4f6;
+            font-family: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+          }
+          .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(229, 231, 235, 0.8);
+          }
+          .header {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            padding: 32px 24px;
+            text-align: center;
+            position: relative;
+          }
+          .header-badge {
+            display: inline-block;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            margin-bottom: 12px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+          }
+          .header h2 {
+            margin: 0;
+            color: #ffffff;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+          }
+          .header p {
+            margin: 6px 0 0 0;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 15px;
+            font-weight: 400;
+          }
+          .content {
+            padding: 32px 24px;
+            background-color: #ffffff;
+          }
+          .meta-box {
+            background-color: #f9fafb;
+            border: 1px solid #f3f4f6;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+          }
+          .message-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #374151;
+            margin: 0 0 12px 0;
+            display: flex;
+            align-items: center;
+          }
+          .message-box {
+            background-color: #ffffff;
+            border-left: 4px solid #7c3aed;
+            border-top: 1px solid #f3f4f6;
+            border-right: 1px solid #f3f4f6;
+            border-bottom: 1px solid #f3f4f6;
+            border-radius: 0 12px 12px 0;
+            padding: 20px;
+            font-size: 16px;
+            color: #4b5563;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+          }
+          .cta-wrapper {
+            text-align: center;
+            margin-top: 32px;
+          }
+          .cta-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: #ffffff !important;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            box-shadow: 0 4px 14px rgba(79, 70, 229, 0.35);
+          }
+          .footer {
+            background-color: #f9fafb;
+            border-top: 1px solid #f3f4f6;
+            padding: 24px;
+            text-align: center;
+          }
+          .footer-logo {
+            font-size: 14px;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 12px;
+            letter-spacing: -0.2px;
+          }
+          .footer-socials {
+            margin-bottom: 16px;
+          }
+          .footer-socials a {
+            color: #9ca3af;
+            text-decoration: none;
+            margin: 0 8px;
+            font-size: 13px;
+            font-weight: 500;
+          }
+          .footer-socials a:hover {
+            color: #4f46e5;
+          }
+          .footer p {
+            margin: 0;
+            font-size: 12px;
+            color: #9ca3af;
+            line-height: 1.5;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <span class="header-badge">Developer Portfolio</span>
+            <h2>New Contact Message</h2>
+            <p>Direct message from your portfolio website</p>
+          </div>
+          <div class="content">
+            <div class="meta-box">
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                  <td style="padding: 6px 0; font-size: 13px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; width: 120px; vertical-align: top;">Name:</td>
+                  <td style="padding: 6px 0; font-size: 15px; font-weight: 500; color: #111827; vertical-align: top;">${name}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px 0; font-size: 13px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; vertical-align: top;">Email:</td>
+                  <td style="padding: 6px 0; font-size: 15px; font-weight: 500; color: #111827; vertical-align: top;"><a href="mailto:${email}" style="color: #4f46e5; text-decoration: none; border-bottom: 1px dashed rgba(79, 70, 229, 0.4);">${email}</a></td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px 0; font-size: 13px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; vertical-align: top;">Sent At:</td>
+                  <td style="padding: 6px 0; font-size: 15px; font-weight: 500; color: #111827; vertical-align: top;">${new Date().toLocaleString()}</td>
+                </tr>
+              </table>
+            </div>
+            
+            <h3 class="message-title">Message Content</h3>
+            <div class="message-box">${message}</div>
+            
+            <div class="cta-wrapper">
+              <a href="mailto:${email}" class="cta-btn">Quick Reply to ${name}</a>
+            </div>
+          </div>
+          <div class="footer">
+            <div class="footer-logo">Pavan Kumar Chakali</div>
+            <div class="footer-socials">
+              <a href="https://github.com/PavankumarCH22" target="_blank">GitHub</a>
+              <span style="color: #e5e7eb;">•</span>
+              <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+            </div>
+            <p>This message was securely dispatched from your portfolio serverless api backend.</p>
           </div>
         </div>
-        <div style="background-color: #f0f0f0; text-align: center; padding: 12px; font-size: 12px; color: #888;">
-          This email was auto-generated by your portfolio web server.
-        </div>
-      </div>
+      </body>
+      </html>
     `,
   };
 
