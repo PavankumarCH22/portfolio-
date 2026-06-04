@@ -1,5 +1,4 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
 
@@ -272,85 +271,20 @@ const DEFAULT_PROJECTS = [
 ];
 
 const memoryMessages = [];
-let isConnected = false;
 
-async function connectDB() {
-  if (isConnected) return true;
-
-  const uri = process.env.MONGODB_URI;
-  if (!uri || !/^mongodb(\+srv)?:\/\//.test(uri)) {
-    return false;
-  }
-
-  await mongoose.connect(uri);
-  isConnected = true;
-  return true;
-}
-
-const projectSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  description: { type: String, required: true },
-  techStack: [String],
-  githubUrl: String,
-  liveUrl: String,
-  featured: { type: Boolean, default: false },
-  createdAt: { type: Date, default: Date.now },
+app.get('/api/projects', (req, res) => {
+  res.json({ success: true, data: DEFAULT_PROJECTS, source: 'static' });
 });
 
-const messageSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true },
-  message: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now },
+app.post('/api/projects', (req, res) => {
+  res.status(403).json({
+    success: false,
+    error: 'Project creation is disabled. Backend is running in database-free Mode.',
+  });
 });
 
-const Project = mongoose.models.Project || mongoose.model('Project', projectSchema);
-const Message = mongoose.models.Message || mongoose.model('Message', messageSchema);
-
-app.get('/api/projects', async (req, res) => {
-  try {
-    const connected = await connectDB();
-    if (!connected) {
-      return res.json({ success: true, data: DEFAULT_PROJECTS, source: 'fallback' });
-    }
-
-    const projects = await Project.find().sort({ featured: -1, createdAt: -1 });
-    res.json({ success: true, data: projects });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
-});
-
-app.post('/api/projects', async (req, res) => {
-  try {
-    const connected = await connectDB();
-    if (!connected) {
-      return res.status(503).json({
-        success: false,
-        error: 'MongoDB is not configured. Add a valid MONGODB_URI to create projects.',
-      });
-    }
-
-    const project = await Project.create(req.body);
-    res.status(201).json({ success: true, data: project });
-  } catch (err) {
-    res.status(400).json({ success: false, error: err.message });
-  }
-});
-
-app.post('/api/seed', async (req, res) => {
-  try {
-    const connected = await connectDB();
-    if (!connected) {
-      return res.json({ success: true, data: DEFAULT_PROJECTS, source: 'fallback' });
-    }
-
-    await Project.deleteMany({});
-    const projects = await Project.insertMany(DEFAULT_PROJECTS.map(({ _id, ...project }) => project));
-    res.json({ success: true, data: projects });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
+app.post('/api/seed', (req, res) => {
+  res.json({ success: true, data: DEFAULT_PROJECTS, source: 'static' });
 });
 
 app.post('/api/contact', async (req, res) => {
@@ -360,91 +294,49 @@ app.post('/api/contact', async (req, res) => {
       return res.status(400).json({ success: false, error: 'All fields are required.' });
     }
 
-    const connected = await connectDB();
-    let msg;
-    let source;
+    const msg = {
+      _id: `msg-${Date.now()}`,
+      name,
+      email,
+      message,
+      createdAt: new Date(),
+    };
+    memoryMessages.unshift(msg);
 
-    if (!connected) {
-      msg = {
-        _id: `memory-${Date.now()}`,
-        name,
-        email,
-        message,
-        createdAt: new Date(),
-      };
-      memoryMessages.unshift(msg);
-      source = 'memory';
-    } else {
-      msg = await Message.create({ name, email, message });
-    }
-
-    // Attempt to send email in the background (don't block the API response)
-    sendContactEmail(name, email, message).catch(err => {
+    // Send email using Nodemailer
+    let emailStatus = 'sent';
+    try {
+      await sendContactEmail(name, email, message);
+    } catch (err) {
       console.error('Nodemailer failed to send email:', err);
-    });
+      emailStatus = 'failed';
+    }
 
-    res.status(201).json({ success: true, data: msg, ...(source ? { source } : {}) });
+    res.status(201).json({ success: true, data: msg, emailStatus });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
   }
 });
 
-app.get('/api/messages', async (req, res) => {
-  try {
-    const connected = await connectDB();
-    if (!connected) {
-      return res.json({ success: true, data: memoryMessages, source: 'memory' });
-    }
-
-    const messages = await Message.find().sort({ createdAt: -1 });
-    res.json({ success: true, data: messages });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
+app.get('/api/messages', (req, res) => {
+  res.json({ success: true, data: memoryMessages, source: 'memory' });
 });
 
-app.delete('/api/messages/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const connected = await connectDB();
-    if (!connected) {
-      const index = memoryMessages.findIndex(m => m._id === id);
-      if (index !== -1) {
-        memoryMessages.splice(index, 1);
-        return res.json({ success: true, message: 'Message deleted from memory.' });
-      }
-      return res.status(404).json({ success: false, error: 'Message not found in memory.' });
-    }
-
-    const result = await Message.findByIdAndDelete(id);
-    if (!result) {
-      return res.status(404).json({ success: false, error: 'Message not found in database.' });
-    }
-    res.json({ success: true, message: 'Message deleted successfully.' });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
+app.delete('/api/messages/:id', (req, res) => {
+  const { id } = req.params;
+  const index = memoryMessages.findIndex(m => m._id === id);
+  if (index !== -1) {
+    memoryMessages.splice(index, 1);
+    return res.json({ success: true, message: 'Message deleted from memory.' });
   }
+  res.status(404).json({ success: false, error: 'Message not found in memory.' });
 });
 
-app.delete('/api/projects/:id', async (req, res) => {
-  try {
-    const { id } = req.params;
-    const connected = await connectDB();
-    if (!connected) {
-      return res.status(503).json({
-        success: false,
-        error: 'Database operation unavailable in fallback mode.',
-      });
-    }
-
-    const result = await Project.findByIdAndDelete(id);
-    if (!result) {
-      return res.status(404).json({ success: false, error: 'Project not found.' });
-    }
-    res.json({ success: true, message: 'Project deleted successfully.' });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
+app.delete('/api/projects/:id', (req, res) => {
+  res.status(403).json({
+    success: false,
+    error: 'Project deletion is disabled. Backend is running in database-free Mode.',
+  });
 });
 
 app.post('/api/admin/auth', (req, res) => {
