@@ -44,7 +44,16 @@ export default function Contact() {
       const data = await res.json();
       if (data.success) {
         setStatus('success');
-        triggerToast('Message sent successfully! I will get back to you soon.', 'success');
+        
+        // Provide clear user feedback depending on the email integration's execution status
+        if (data.emailStatus === 'simulated') {
+          triggerToast('Message submitted (email simulated - API keys not configured).', 'success');
+        } else if (data.emailStatus === 'failed') {
+          triggerToast('Message saved, but email notification failed.', 'error');
+        } else {
+          triggerToast('Message sent successfully! I will get back to you soon.', 'success');
+        }
+        
         setForm({ name: '', email: '', message: '' });
         setFocusState({ name: false, email: false, message: false });
         setTimeout(() => setStatus('idle'), 5000);
