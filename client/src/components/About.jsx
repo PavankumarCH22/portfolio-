@@ -19,7 +19,7 @@ export default function About() {
             <div className="about__image-container">
               <div className="about__image-glow" />
               <div className="about__image-wrapper">
-                <img src="/pavan.png" alt="Pavan Kumar" className="about__image" />
+                <img src="/pavan.jpg" alt="Pavan Kumar" className="about__image" />
                 <div className="about__image-overlay" />
                 <div className="about__image-badge">
                   <Sparkles size={12} className="about__badge-icon" />
