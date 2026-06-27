@@ -1,4 +1,4 @@
-import { Terminal, Layout, Database, Wrench, Sparkles } from 'lucide-react';
+import { Terminal, Layout, Database, Wrench, Layers } from 'lucide-react';
 import './Skills.css';
 
 const skillGroups = [
@@ -9,7 +9,6 @@ const skillGroups = [
     skills: [
       { name: 'JavaScript (ES6+)', level: 85 },
       { name: 'HTML5 & CSS3', level: 90 },
-      { name: 'Java', level: 60 },
     ],
   },
   {
@@ -43,11 +42,53 @@ const skillGroups = [
   },
 ];
 
-const learning = [
-  'Machine Learning Models',
-  'Neural Networks & AI',
-  'Advanced Data Structures',
-  'Advanced Java (Spring Boot)'
+const mernStackDetails = [
+  {
+    letter: 'M',
+    name: 'MongoDB',
+    subtitle: 'NoSQL Document Database',
+    color: '#00e676',
+    points: [
+      'NoSQL document database',
+      'Stores data as JSON-like documents (BSON)',
+      'Schema-less & highly scalable',
+      'Used with Mongoose ODM in Node.js'
+    ]
+  },
+  {
+    letter: 'E',
+    name: 'Express.js',
+    subtitle: 'Backend Web Framework',
+    color: '#a0a0a0',
+    points: [
+      'Lightweight Node.js web framework',
+      'Handles routing, middleware, REST APIs',
+      'Easy to integrate with MongoDB via Mongoose'
+    ]
+  },
+  {
+    letter: 'R',
+    name: 'React.js',
+    subtitle: 'Frontend UI Library',
+    color: '#00d2ff',
+    points: [
+      'Frontend UI library by Meta',
+      'Component-based architecture',
+      'State management: useState, useEffect, Context API, Redux',
+      'Tools: React Router, Axios, Tailwind CSS'
+    ]
+  },
+  {
+    letter: 'N',
+    name: 'Node.js',
+    subtitle: 'JavaScript Server Runtime',
+    color: '#4caf50',
+    points: [
+      'JavaScript runtime on the server',
+      'Non-blocking, event-driven architecture',
+      'Powers the backend alongside Express'
+    ]
+  }
 ];
 
 export default function Skills() {
@@ -82,17 +123,27 @@ export default function Skills() {
           })}
         </div>
 
-        <div className="skills__learning glass-panel animate-fadeUp">
-          <div className="skills__learning-header">
-            <Sparkles size={16} className="skills__learning-icon" />
-            <p className="skills__learning-label">Currently exploring & learning</p>
+        <div className="skills__mern glass-panel animate-fadeUp">
+          <div className="skills__mern-header">
+            <Layers size={20} className="skills__mern-icon" />
+            <h3 className="skills__mern-title">MERN Stack Specialization</h3>
           </div>
-          <div className="skills__learning-tags">
-            {learning.map(l => (
-              <span key={l} className="learning-tag">
-                <span className="learning-tag__dot" />
-                {l}
-              </span>
+          <div className="mern-details__grid">
+            {mernStackDetails.map((item, idx) => (
+              <div key={item.name} className="mern-card" style={{ '--tech-color': item.color }}>
+                <div className="mern-card__badge-wrapper">
+                  <span className="mern-card__letter">{item.letter}</span>
+                </div>
+                <div className="mern-card__content">
+                  <h4 className="mern-card__title">{item.name}</h4>
+                  <p className="mern-card__subtitle">{item.subtitle}</p>
+                  <ul className="mern-card__list">
+                    {item.points.map((pt, pIdx) => (
+                      <li key={pIdx} className="mern-card__item">{pt}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             ))}
           </div>
         </div>

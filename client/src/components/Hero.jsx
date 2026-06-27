@@ -80,7 +80,7 @@ export default function Hero() {
           </div>
 
           <div className="hero__stack animate-fadeUp delay-4">
-            {['React.js', 'Node.js', 'Express.js', 'MongoDB', 'AI/ML', 'Java'].map(t => (
+            {['React.js', 'Node.js', 'Express.js', 'MongoDB', 'AI/ML'].map(t => (
               <span key={t} className="hero__tag">{t}</span>
             ))}
           </div>
@@ -123,7 +123,6 @@ export default function Hero() {
 &nbsp;&nbsp;skills<span className="o">:</span> [<br />
 &nbsp;&nbsp;&nbsp;&nbsp;<span className="s">"React"</span>, <span className="s">"Node"</span>, <span className="s">"Express"</span>, <span className="s">"MongoDB"</span><br />
 &nbsp;&nbsp;],<br />
-&nbsp;&nbsp;learning<span className="o">:</span> [<span className="s">"Machine Learning"</span>, <span className="s">"DSA"</span>, <span className="s">"Java"</span>],<br />
 &nbsp;&nbsp;status<span className="o">:</span> <span className="s">"Open to new opportunities 🚀"</span><br />
 &#125;;<br />
 <br />
@@ -147,7 +146,7 @@ console.<span className="v">log</span>(pavan);
                   <div className="console__prompt">
                     <span className="console__dir">~/pavan-portfolio</span>
                     <span className="console__branch">git:(main)</span>
-                    <span className="console__symbol">$</span> node pavan.js
+                    <span className="console__symbol">$</span> node pavan.js<span className="terminal-cursor" />
                   </div>
                   
                   <div className="console__outputs">

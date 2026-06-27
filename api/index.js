@@ -445,28 +445,9 @@ const DEFAULT_PROJECTS = [
     _id: 'fallback-2',
     title: 'Personal Portfolio',
     description:
-      'Responsive portfolio website showcasing projects and skills. Built with React and Tailwind CSS with smooth animations and a clean modern design.',
-    techStack: ['React', 'CSS', 'JavaScript'],
+      'Responsive portfolio website showcasing projects and skills. Built with MongoDB, Express.js, React, and Node.js. Deployed on Vercel with smooth animations, dark space theme, and high-performance serverless endpoints.',
+    techStack: ['MongoDB', 'Express.js', 'React', 'Node.js'],
     githubUrl: 'https://github.com/PavankumarCH22',
-    featured: true,
-  },
-  {
-    _id: 'fallback-3',
-    title: 'Frontend UI Projects',
-    description:
-      'Collection of front-end projects applying HTML, CSS, and JavaScript to build clean, user-friendly interfaces with modern design patterns.',
-    techStack: ['HTML', 'CSS', 'JavaScript'],
-    githubUrl: 'https://github.com/PavankumarCH22',
-    featured: false,
-  },
-  {
-    _id: 'fallback-4',
-    title: 'Kandanavolu Paakashala',
-    description:
-      'A professional Andhra catering web application built for Kurnool-based catering services. Features dynamic multi-language (i18n) support (English, Telugu, Hindi), bespoke menu configurations, fluid animations, and an integrated reservation funnel.',
-    techStack: ['HTML5', 'CSS3', 'JavaScript', 'Firebase', 'i18n'],
-    githubUrl: 'https://github.com/PavankumarCH22',
-    liveUrl: 'https://kandanavolu-paakashala.firebaseapp.com/',
     featured: true,
   },
 ];

@@ -20,44 +20,18 @@ const FALLBACK_PROJECTS = [
     _id: '2',
     title: 'Personal Developer Portfolio',
     description:
-      'Responsive portfolio website showcasing projects, skills, and contact. Built with React and deployed on Vercel with smooth animations, dark space theme, and high-performance serverless endpoints.',
-    techStack: ['React', 'CSS', 'Vite', 'Vercel', 'MongoDB'],
+      'Responsive portfolio website showcasing projects, skills, and contact. Built with MongoDB, Express.js, React, and Node.js. Deployed on Vercel with smooth animations, dark space theme, and high-performance serverless endpoints.',
+    techStack: ['MongoDB', 'Express.js', 'React', 'Node.js', 'Vercel'],
     githubUrl: 'https://github.com/PavankumarCH22',
     liveUrl: 'https://github.com/PavankumarCH22',
     featured: true,
     setup: 'cd client && npm install && npm run build',
     architecture: 'Single-project Vercel monorepo mapping static assets and Express serverless functions concurrently.',
     learnings: 'Mastered glassmorphism design tokens, engineered real-time database state sync, and refined clean CSS keyframes.'
-  },
-  {
-    _id: '3',
-    title: 'Frontend UI Projects',
-    description:
-      'Collection of front-end projects applying HTML, CSS, and JavaScript to build clean, user-friendly interfaces with modern design patterns and pixel-perfect layouts.',
-    techStack: ['HTML', 'CSS', 'JavaScript'],
-    githubUrl: 'https://github.com/PavankumarCH22',
-    liveUrl: 'https://github.com/PavankumarCH22',
-    featured: false,
-    setup: 'open index.html in browser',
-    architecture: 'Pure semantic HTML5 layout with vanilla CSS custom properties and pure Javascript event emitters.',
-    learnings: 'Perfected flexbox/grid alignments, studied performance paint layers, and crafted clean visual micro-interactions.'
-  },
-  {
-    _id: '4',
-    title: 'Kandanavolu Paakashala',
-    description:
-      'A professional Andhra catering web application built for Kurnool-based catering services. Features dynamic multi-language (i18n) support (English, Telugu, Hindi), bespoke menu configurations, fluid animations, and an integrated reservation funnel.',
-    techStack: ['HTML5', 'CSS3', 'JavaScript', 'Firebase', 'i18n'],
-    githubUrl: 'https://github.com/PavankumarCH22',
-    liveUrl: 'https://kandanavolu-paakashala.firebaseapp.com/',
-    featured: true,
-    setup: 'npm install -g firebase-tools && firebase deploy',
-    architecture: 'Single-page application structured around modular semantic components, dynamically controlled language-switcher dictionary assets, responsive media, and automated Firebase Hosting routing pipelines.',
-    learnings: 'Engineered clean client-side dynamic i18n module systems, customized elegant vanilla CSS layout animations, and deployed high-performance global assets via Firebase CLI.'
-  },
+  }
 ];
 
-const categories = ['All', 'MERN', 'React', 'Frontend'];
+const categories = ['All', 'MERN'];
 
 export default function Projects() {
   const [projects, setProjects] = useState(FALLBACK_PROJECTS);

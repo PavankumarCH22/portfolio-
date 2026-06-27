@@ -59,7 +59,7 @@ export default function About() {
               </p>
               
               <p className="about__text">
-                Outside of classes, I have independently researched, built, and shipped complex MERN applications from scratch, taking responsibility for the database structures, security protocols, and deployments. I'm actively expanding my horizons into advanced Java architectures, machine learning models, and building AI-integrated SaaS products.
+                Outside of classes, I have independently researched, built, and shipped complex MERN applications from scratch, taking responsibility for the database structures, security protocols, and deployments. I'm actively expanding my horizons into machine learning models, neural networks, and building AI-integrated SaaS products.
               </p>
             </div>
 
