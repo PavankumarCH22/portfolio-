@@ -19,7 +19,7 @@ A modern, high-performance full-stack developer portfolio built with **React (Vi
 
 ## Key Highlights
 
-- **Cinematic Supercar Rolling-Shot Background** — Smooth crossfading photorealistic Lamborghini Aventador SVJ night-highway rolling shots with subtle camera parallax, scroll-linked tracking drift, and high-speed light streaks.
+- **Animated Software & AI Neural Network Background** — Interactive engineering coordinate grid with travelling circuit-trace light beams, live AI neural-network node graph with data pulses, floating monospace code tokens, and subtle cursor spotlight.
 - **Interactive Portrait Card** — Real 4×4 photo-split 3D box-morph reveal animation, natural eye-blink loop, rotating conic gradient border, and 3D mouse-tilt interaction.
 - **Scroll-Triggered Motion System** — Custom `IntersectionObserver` scroll-reveal hook (`useScrollReveal`) with staggered directional animations, top reading progress bar, and `prefers-reduced-motion` accessibility support.
 - **Interactive Hero Terminal** — Clickable VS Code-inspired developer card with live simulated output logs and engineering highlight metrics.
@@ -50,7 +50,7 @@ portfolio-/
 ├── client/
 │   ├── public/               # Portrait frames (pavan.jpg, pavan-blink.jpg) & rolling-shot backgrounds
 │   └── src/
-│       ├── components/       # Navbar, Hero, About, Experience, Skills, Projects, Contact, Footer, SupercarBackground, ScrollProgress, AdminPortal
+│       ├── components/       # Navbar, Hero, About, Experience, Skills, Projects, Contact, Footer, DeveloperBackground, ScrollProgress, AdminPortal
 │       ├── hooks/            # useScrollReveal.js (IntersectionObserver + MutationObserver)
 │       ├── App.jsx
 │       └── index.css         # Theme tokens, glassmorphism utilities, responsive rules & animation keyframes

@@ -1,6 +1,6 @@
 import Navbar from './components/Navbar';
 import ScrollProgress from './components/ScrollProgress';
-import SupercarBackground from './components/SupercarBackground';
+import DeveloperBackground from './components/DeveloperBackground';
 import Hero from './components/Hero';
 import About from './components/About';
 import Experience from './components/Experience';
@@ -16,7 +16,7 @@ export default function App() {
 
   return (
     <>
-      <SupercarBackground />
+      <DeveloperBackground />
       <ScrollProgress />
       <Navbar />
       <main>

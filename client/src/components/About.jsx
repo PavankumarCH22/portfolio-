@@ -100,7 +100,7 @@ export default function About() {
     if (!rect) return;
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
-    setTilt({ rx: (-y * 12).toFixed(2), ry: (x * 12).toFixed(2) });
+    setTilt({ rx: (-y * 18).toFixed(2), ry: (x * 22).toFixed(2) });
   };
 
   const handleMouseLeave = () => {
@@ -140,17 +140,19 @@ export default function About() {
               <span className="about__float-box about__float-box--3" aria-hidden="true" />
 
               <div className="about__image-wrapper">
-                {/* Base Seamless Portrait + Live Eye-Blink Frame */}
-                <img src="/pavan.jpg" alt="Pavan Kumar Chakali" className="about__image" />
-                {blinkReady && (
-                  <img
-                    src="/pavan-blink.jpg"
-                    alt=""
-                    aria-hidden="true"
-                    className={`about__image about__image--blink ${isBlinking ? 'about__image--blinking' : ''}`}
-                    onError={() => setBlinkReady(false)}
-                  />
-                )}
+                {/* Continuous 3D Head/Portrait Rotation Stage + Natural Eye Blink */}
+                <div className="about__head-3d-stage">
+                  <img src="/pavan.jpg" alt="Pavan Kumar Chakali" className="about__image" />
+                  {blinkReady && (
+                    <img
+                      src="/pavan-blink.jpg"
+                      alt=""
+                      aria-hidden="true"
+                      className={`about__image about__image--blink ${isBlinking ? 'about__image--blinking' : ''}`}
+                      onError={() => setBlinkReady(false)}
+                    />
+                  )}
+                </div>
 
                 {/* 4x4 Real Photo-Split 3D Box-Morph Layer */}
                 {isMorphing && (

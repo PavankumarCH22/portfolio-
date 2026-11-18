@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -7,27 +7,28 @@
 }
 
 :root {
-  --bg: #040814;
-  --bg-card: rgba(7, 14, 30, 0.62);
-  --bg-card-hover: rgba(12, 24, 50, 0.78);
-  --accent: #00d4ff;
-  --accent-light: #6be8ff;
-  --accent-dim: rgba(0, 212, 255, 0.1);
-  --accent-glow: rgba(0, 212, 255, 0.35);
-  --green: #00e676;
-  --green-dim: rgba(0, 230, 118, 0.1);
-  --pink: #ff2a5f;
-  --pink-dim: rgba(255, 42, 95, 0.1);
-  --blue: #ff9f1c;
-  --blue-dim: rgba(255, 159, 28, 0.1);
-  --text-primary: #f5f9ff;
-  --text-secondary: #b4c2d9;
-  --text-muted: #7283a3;
-  --border: rgba(120, 210, 255, 0.1);
-  --border-hover: rgba(0, 212, 255, 0.35);
-  --glass-border: rgba(140, 220, 255, 0.12);
+  --bg: #050914;
+  --bg-card: rgba(10, 17, 34, 0.72);
+  --bg-card-hover: rgba(15, 25, 48, 0.86);
+  --accent: #38bdf8;
+  --accent-light: #7dd3fc;
+  --accent-dim: rgba(56, 189, 248, 0.12);
+  --accent-glow: rgba(56, 189, 248, 0.35);
+  --green: #10b981;
+  --green-dim: rgba(16, 185, 129, 0.12);
+  --pink: #f472b6;
+  --pink-dim: rgba(244, 114, 182, 0.12);
+  --blue: #818cf8;
+  --blue-dim: rgba(129, 140, 248, 0.14);
+  --text-primary: #f8fafc;
+  --text-secondary: #b8c7dc;
+  --text-muted: #7487a6;
+  --border: rgba(148, 163, 184, 0.14);
+  --border-hover: rgba(56, 189, 248, 0.42);
+  --glass-border: rgba(148, 163, 184, 0.15);
   --font-display: 'Outfit', sans-serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
   --radius-sm: 8px;
   --radius: 16px;
   --radius-lg: 28px;
@@ -50,8 +51,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── Live Photorealistic Lamborghini Cinematic Rolling-Shot Background ── */
-.supercar-bg-stage {
+/* ── Live Software Engineering & AI Neural Network Background ── */
+.dev-bg-stage {
   position: fixed;
   inset: 0;
   width: 100vw;
@@ -60,81 +61,315 @@ body {
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
-  background: #040814;
+  background:
+    radial-gradient(ellipse 80% 55% at 50% -10%, rgba(14, 34, 68, 0.72), transparent 70%),
+    linear-gradient(180deg, #050914 0%, #070d1c 52%, #040812 100%);
 }
 
-.supercar-bg-parallax {
+.dev-bg-aurora {
   position: absolute;
-  inset: -4%;
-  width: 108%;
-  height: 108%;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 50%;
+  filter: blur(110px);
+  pointer-events: none;
   will-change: transform;
 }
 
-.supercar-shot {
+.dev-bg-aurora--primary {
+  width: 640px;
+  height: 480px;
+  top: -12%;
+  left: -8%;
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.22) 0%, transparent 70%);
+  animation: devAuroraDriftA 16s ease-in-out infinite alternate;
+}
+
+.dev-bg-aurora--secondary {
+  width: 600px;
+  height: 500px;
+  top: 20%;
+  right: -10%;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, transparent 70%);
+  animation: devAuroraDriftB 20s ease-in-out infinite alternate;
+}
+
+.dev-bg-aurora--emerald {
+  width: 540px;
+  height: 440px;
+  bottom: -14%;
+  left: 22%;
+  background: radial-gradient(circle, rgba(16, 230, 148, 0.16) 0%, transparent 70%);
+  animation: devAuroraDriftC 18s ease-in-out infinite alternate;
+}
+
+.dev-bg-aurora--pink {
+  width: 480px;
+  height: 420px;
+  bottom: 12%;
+  right: 14%;
+  background: radial-gradient(circle, rgba(244, 63, 142, 0.14) 0%, transparent 70%);
+  animation: devAuroraDriftA 22s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes devAuroraDriftA {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(70px, 45px, 0) scale(1.12); }
+}
+
+@keyframes devAuroraDriftB {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(-65px, 55px, 0) scale(1.1); }
+}
+
+@keyframes devAuroraDriftC {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(50px, -45px, 0) scale(1.08); }
+}
+
+.dev-bg-grid {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center 58%;
-  background-repeat: no-repeat;
-  opacity: 0;
-  transition: opacity 2.2s ease-in-out;
-  will-change: transform, opacity;
-  filter: saturate(1.12) contrast(1.06) brightness(0.72);
+  background-image:
+    linear-gradient(to right, rgba(148, 163, 184, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.055) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 88% 82% at 50% 42%, #000 45%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 88% 82% at 50% 42%, #000 45%, transparent 100%);
 }
 
-.supercar-shot--active {
-  opacity: 1;
+.dev-bg-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(56, 189, 248, 0.16) 1px, transparent 1px);
+  background-size: 64px 64px;
+  background-position: 0 0;
+  opacity: 0.55;
+  mask-image: radial-gradient(ellipse 85% 80% at 50% 45%, #000 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 85% 80% at 50% 45%, #000 40%, transparent 100%);
 }
 
-.supercar-shot--rear {
-  animation: lamboCruiseRear 18s ease-in-out infinite alternate;
-}
-
-.supercar-shot--front {
-  animation: lamboCruiseFront 18s ease-in-out infinite alternate;
-}
-
-@keyframes lamboCruiseRear {
-  0% {
-    transform: scale(1.04) translate3d(-1.4%, 0.6%, 0);
-  }
-  50% {
-    transform: scale(1.1) translate3d(1.2%, -0.8%, 0);
-  }
-  100% {
-    transform: scale(1.06) translate3d(2.2%, 0.4%, 0);
-  }
-}
-
-@keyframes lamboCruiseFront {
-  0% {
-    transform: scale(1.05) translate3d(1.6%, -0.5%, 0);
-  }
-  50% {
-    transform: scale(1.11) translate3d(-1.2%, 0.7%, 0);
-  }
-  100% {
-    transform: scale(1.06) translate3d(-2%, -0.4%, 0);
-  }
-}
-
-.supercar-streaks {
+.dev-bg-network {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  mix-blend-mode: screen;
 }
 
-.supercar-vignette {
+/* ── Animated Glowing Developer Computer System Backdrop ── */
+.dev-system-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0.42;
+  transition: transform 0.22s ease-out;
+  will-change: transform;
+}
+
+.dev-system-svg {
+  width: min(94vw, 1180px);
+  height: auto;
+  filter: drop-shadow(0 0 38px rgba(0, 229, 255, 0.22)) drop-shadow(0 0 60px rgba(168, 85, 247, 0.16));
+  animation: sysSceneFloat 9s ease-in-out infinite alternate;
+}
+
+.sys-monitor--left {
+  animation: sysSideFloatA 6.5s ease-in-out infinite alternate;
+}
+
+.sys-monitor--right {
+  animation: sysSideFloatB 7.2s ease-in-out infinite alternate;
+}
+
+.sys-code-scroll {
+  animation: sysCodeDrift 8s ease-in-out infinite alternate;
+}
+
+.sys-scanline {
+  animation: sysScanMove 4.5s linear infinite;
+}
+
+.sys-bar--1 {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: sysBarPulse 2.8s ease-in-out infinite alternate;
+}
+
+.sys-bar--2 {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: sysBarPulse 3.4s ease-in-out 0.5s infinite alternate;
+}
+
+.sys-bar--3 {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: sysBarPulse 2.4s ease-in-out 1s infinite alternate;
+}
+
+.sys-wave {
+  stroke-dasharray: 220;
+  animation: sysWaveFlow 3.5s linear infinite;
+}
+
+.sys-wave--2 {
+  animation-duration: 4.5s;
+  animation-direction: reverse;
+}
+
+.sys-ring-spin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: sysSpin 5s linear infinite;
+}
+
+.sys-ring-spin-rev {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: sysSpin 3.6s linear infinite reverse;
+}
+
+.sys-led-blink {
+  animation: sysLedPulse 1.6s ease-in-out infinite;
+}
+
+.sys-cursor-blink {
+  animation: sysLedPulse 0.9s step-end infinite;
+}
+
+.sys-rgb-bar {
+  animation: sysRgbGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes sysSceneFloat {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-14px); }
+}
+
+@keyframes sysSideFloatA {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-9px); }
+}
+
+@keyframes sysSideFloatB {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(9px); }
+}
+
+@keyframes sysCodeDrift {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-18px); }
+}
+
+@keyframes sysScanMove {
+  0% { transform: translateY(-44px); opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translateY(314px); opacity: 0; }
+}
+
+@keyframes sysBarPulse {
+  0% { transform: scaleX(0.45); }
+  100% { transform: scaleX(1.05); }
+}
+
+@keyframes sysWaveFlow {
+  0% { stroke-dashoffset: 220; }
+  100% { stroke-dashoffset: 0; }
+}
+
+@keyframes sysSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes sysLedPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+@keyframes sysRgbGlow {
+  0% { opacity: 0.35; }
+  100% { opacity: 0.85; }
+}
+
+.dev-bg-tokens {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  will-change: transform;
+  transition: transform 0.25s ease-out;
+}
+
+.dev-bg-token {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: rgba(125, 211, 252, 0.24);
+  background: rgba(10, 17, 34, 0.36);
+  border: 1px solid rgba(56, 189, 248, 0.18);
+  padding: 0.3rem 0.65rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  animation: devTokenFloat 8s ease-in-out infinite alternate;
+}
+
+.dev-bg-token--cyan {
+  color: rgba(56, 229, 255, 0.28);
+  border-color: rgba(0, 229, 255, 0.2);
+}
+
+.dev-bg-token--violet {
+  color: rgba(192, 132, 252, 0.3);
+  border-color: rgba(168, 85, 247, 0.22);
+}
+
+.dev-bg-token--emerald {
+  color: rgba(52, 211, 153, 0.28);
+  border-color: rgba(16, 230, 148, 0.2);
+}
+
+.dev-bg-token--pink {
+  color: rgba(251, 113, 133, 0.28);
+  border-color: rgba(244, 63, 142, 0.2);
+}
+
+.dev-bg-token--amber {
+  color: rgba(251, 191, 36, 0.28);
+  border-color: rgba(251, 191, 36, 0.2);
+}
+
+@keyframes devTokenFloat {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate3d(0, -14px, 0);
+    opacity: 0.65;
+  }
+}
+
+.dev-bg-spotlight {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transition: background 0.12s linear;
+}
+
+.dev-bg-vignette {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(4, 8, 20, 0.52) 0%, rgba(4, 8, 20, 0.28) 45%, rgba(4, 8, 20, 0.7) 100%),
-    radial-gradient(circle at 50% 48%, rgba(4, 8, 20, 0.08) 0%, rgba(3, 6, 16, 0.66) 100%);
+    linear-gradient(180deg, rgba(5, 9, 20, 0.36) 0%, rgba(5, 9, 20, 0.08) 45%, rgba(4, 8, 18, 0.62) 100%),
+    radial-gradient(circle at 50% 45%, transparent 45%, rgba(3, 6, 15, 0.6) 100%);
   pointer-events: none;
 }
 
@@ -405,7 +640,21 @@ footer {
   .hero__glow--1,
   .hero__glow--2,
   .hero__terminal-wrapper,
-  .hero__scroll-line {
+  .hero__scroll-line,
+  .dev-system-svg,
+  .sys-monitor--left,
+  .sys-monitor--right,
+  .sys-code-scroll,
+  .sys-scanline,
+  .sys-bar--1,
+  .sys-bar--2,
+  .sys-bar--3,
+  .sys-wave,
+  .sys-ring-spin,
+  .sys-ring-spin-rev,
+  .sys-led-blink,
+  .sys-cursor-blink,
+  .sys-rgb-bar {
     animation: none !important;
   }
 
@@ -535,8 +784,9 @@ footer {
 @media (max-width: 768px) {
   .container { padding: 0 1.25rem; }
   .section { padding: 4.5rem 0; }
-  .supercar-shot {
-    background-position: 48% 55%;
+  .dev-bg-token {
+    font-size: 0.68rem;
+    opacity: 0.42;
   }
   .toast-container {
     right: 1rem;

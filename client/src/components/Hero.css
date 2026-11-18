@@ -22,7 +22,7 @@
 .hero__glow--1 {
   width: 480px;
   height: 480px;
-  background: radial-gradient(circle, rgba(0, 212, 255, 0.14) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.14) 0%, transparent 70%);
   top: -150px;
   left: -100px;
   animation: float 8s ease-in-out infinite alternate;
@@ -31,7 +31,7 @@
 .hero__glow--2 {
   width: 380px;
   height: 380px;
-  background: radial-gradient(circle, rgba(255, 107, 0, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.14) 0%, transparent 70%);
   bottom: 10%;
   right: 15%;
   animation: float 10s ease-in-out infinite alternate-reverse;
@@ -40,7 +40,7 @@
 .hero__glow--3 {
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, rgba(255, 42, 95, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
   top: 40%;
   left: 45%;
 }
@@ -305,8 +305,8 @@
 
 /* ── Syntax Highlighting ── */
 .terminal__code {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
   line-height: 1.7;
   color: #a9b2c3;
   display: flex;
@@ -376,8 +376,8 @@
 
 /* ── Console Mode ── */
 .terminal__console {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 0.825rem;
+  font-family: var(--font-mono);
+  font-size: 0.81rem;
   color: #abb2bf;
   display: flex;
   flex-direction: column;
