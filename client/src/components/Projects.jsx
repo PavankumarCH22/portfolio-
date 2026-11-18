@@ -5,33 +5,63 @@ import './Projects.css';
 const FALLBACK_PROJECTS = [
   {
     _id: '1',
-    title: 'Full-Stack MERN Application',
+    title: 'IntelliHire AI – AI-Powered Hiring Platform',
     description:
-      'End-to-end web application built with MongoDB, Express.js, React, and Node.js. Developed RESTful APIs for smooth client-server communication with dynamic component-based React front-end.',
-    techStack: ['MongoDB', 'Express.js', 'React', 'Node.js'],
+      'Built and deployed a web application that applies AI to hiring and career workflows, featuring a responsive, user-focused interface live on Render. Combines front-end development, API integration, and cloud deployment in a production-style application.',
+    techStack: ['React.js', 'AI Integration', 'REST APIs', 'Node.js', 'Render'],
+    category: 'AI',
     githubUrl: 'https://github.com/PavankumarCH22',
-    liveUrl: 'https://github.com/PavankumarCH22',
+    liveUrl: 'https://intellihire-frontend-qrtq.onrender.com',
     featured: true,
-    setup: 'npm run install:all && npm run dev',
-    architecture: 'MERN architecture with client-side proxy routing and Express routing controllers.',
-    learnings: 'Engineered robust database models, handled API payloads securely, and configured CORS proxies for smooth React-to-node connectivity.'
+    setup: 'npm install && npm run build',
+    architecture: 'Responsive React front end integrated with AI-assisted hiring & career workflow APIs deployed on Render.',
+    learnings: 'Combined AI workflow integration, responsive UI design, and end-to-end cloud deployment for production readiness.'
   },
   {
     _id: '2',
-    title: 'Personal Developer Portfolio',
+    title: 'Kandanavolu Paakashala – Catering Business Website',
     description:
-      'Responsive portfolio website showcasing projects, skills, and contact. Built with MongoDB, Express.js, React, and Node.js. Deployed on Vercel with smooth animations, dark space theme, and high-performance serverless endpoints.',
-    techStack: ['MongoDB', 'Express.js', 'React', 'Node.js', 'Vercel'],
+      'Designed and deployed a production website for a real catering business in Kurnool, Andhra Pradesh, serving active customers. Features multi-language support (English, Telugu, Hindi), a booking system with form validation, WhatsApp API integration, and an admin dashboard for bookings and inquiries.',
+    techStack: ['HTML5', 'CSS3', 'JavaScript', 'Firebase', 'WhatsApp API'],
+    category: 'Client Work',
     githubUrl: 'https://github.com/PavankumarCH22',
-    liveUrl: 'https://github.com/PavankumarCH22',
+    liveUrl: '',
     featured: true,
+    setup: 'firebase deploy',
+    architecture: 'Firebase-backed production business site with multi-language localization, WhatsApp API triggers, and a real-time booking admin dashboard.',
+    learnings: 'Shipped a live client product handling real customer bookings, trilingual content, form validation, and business operations.'
+  },
+  {
+    _id: '3',
+    title: 'Full-Stack Web Application – MERN Stack',
+    description:
+      'Independently built an end-to-end MERN web application featuring REST APIs with routing, middleware, and error handling in Express.js, paired with a React.js front end with client-side routing and MongoDB CRUD operations.',
+    techStack: ['MongoDB', 'Express.js', 'React.js', 'Node.js'],
+    category: 'MERN',
+    githubUrl: 'https://github.com/PavankumarCH22',
+    liveUrl: '',
+    featured: false,
+    setup: 'npm run install:all && npm run dev',
+    architecture: 'Full-stack MERN architecture with Express REST controllers, middleware error handling, MongoDB schema models, and React Router.',
+    learnings: 'Engineered scalable CRUD endpoints, clean error-handling middleware, and smooth client-server state synchronization.'
+  },
+  {
+    _id: '4',
+    title: 'Personal Portfolio Website',
+    description:
+      'Built and deployed a responsive developer portfolio showcasing experience, projects, and skills using modern CSS layouts, React, and serverless Node.js endpoints on Vercel.',
+    techStack: ['React.js', 'HTML5', 'CSS3', 'JavaScript', 'Vercel'],
+    category: 'MERN',
+    githubUrl: 'https://github.com/PavankumarCH22/portfolio-',
+    liveUrl: 'https://pavankumarchakali.vercel.app',
+    featured: false,
     setup: 'cd client && npm install && npm run build',
-    architecture: 'Single-project Vercel monorepo mapping static assets and Express serverless functions concurrently.',
-    learnings: 'Mastered glassmorphism design tokens, engineered real-time database state sync, and refined clean CSS keyframes.'
+    architecture: 'Vercel monorepo serving static Vite-built React assets alongside Express serverless API routes.',
+    learnings: 'Crafted responsive CSS Flexbox/Grid layouts, interactive UI micro-animations, and serverless contact email delivery.'
   }
 ];
 
-const categories = ['All', 'MERN'];
+const categories = ['All', 'AI', 'Client Work', 'MERN'];
 
 export default function Projects() {
   const [projects, setProjects] = useState(FALLBACK_PROJECTS);
@@ -58,34 +88,34 @@ export default function Projects() {
       .finally(() => setLoading(false));
   }, []);
 
-  const getCategory = (techs) => {
-    if (!techs) return 'Frontend';
+  const getCategory = (project) => {
+    if (project.category) return project.category;
+    const techs = project.techStack;
+    if (!techs) return 'MERN';
     const lowerTechs = techs.map(t => t.toLowerCase());
-    if (lowerTechs.includes('mongodb') && lowerTechs.includes('express.js') && lowerTechs.includes('node.js')) {
-      return 'MERN';
-    }
-    if (lowerTechs.includes('react') || lowerTechs.includes('react.js')) {
-      return 'React';
-    }
-    return 'Frontend';
+    if (lowerTechs.some(t => t.includes('ai'))) return 'AI';
+    if (lowerTechs.includes('firebase')) return 'Client Work';
+    return 'MERN';
   };
 
   const filteredProjects = projects.filter(p => {
     if (filter === 'All') return true;
-    return getCategory(p.techStack) === filter;
+    return getCategory(p) === filter;
   });
 
   return (
     <section className="section projects" id="projects">
       <div className="container">
-        <p className="section-label">Projects</p>
-        <h2 className="section-title">Things I've built</h2>
-        <p className="projects__sub">
-          Real full-stack and UI solutions built from scratch — demonstrating core engineering capabilities.
-        </p>
+        <div data-reveal="fade-up">
+          <p className="section-label">Projects</p>
+          <h2 className="section-title">Things I've built</h2>
+          <p className="projects__sub">
+            Real full-stack and UI solutions built from scratch — demonstrating core engineering capabilities.
+          </p>
+        </div>
 
         {/* Filter Category Tabs */}
-        <div className="projects__filters animate-fadeUp">
+        <div className="projects__filters" data-reveal="fade-up" data-reveal-delay="80">
           <Filter size={14} className="filter-icon" />
           {categories.map(cat => (
             <button
@@ -129,9 +159,10 @@ export default function Projects() {
 
 function ProjectCard({ project, index, onSelect }) {
   return (
-    <article 
-      className={`project-card glass-panel ${project.featured ? 'project-card--featured' : ''} animate-fadeUp`}
-      style={{ animationDelay: `${index * 0.1}s` }}
+    <article
+      className={`project-card glass-panel ${project.featured ? 'project-card--featured' : ''}`}
+      data-reveal="fade-up"
+      data-reveal-delay={String(index * 95)}
       onClick={onSelect}
     >
       {project.featured && <span className="project-card__badge">Featured App</span>}

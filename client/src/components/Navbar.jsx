@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Github, Menu, X } from 'lucide-react';
 import './Navbar.css';
 
-const links = ['About', 'Skills', 'Projects', 'Contact'];
+const links = ['About', 'Experience', 'Skills', 'Projects', 'Contact'];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -14,7 +14,7 @@ export default function Navbar() {
       setScrolled(window.scrollY > 40);
 
       // Scrollspy
-      const sections = ['hero', 'about', 'skills', 'projects', 'contact'];
+      const sections = ['hero', 'about', 'experience', 'skills', 'projects', 'contact'];
       let current = 'hero';
       for (const sec of sections) {
         const el = document.getElementById(sec);

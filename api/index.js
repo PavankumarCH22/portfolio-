@@ -351,7 +351,7 @@ async function sendContactEmail(name, email, message) {
           <div class="footer-socials">
             <a href="https://github.com/PavankumarCH22" target="_blank">GitHub</a>
             <span style="color: #e5e7eb;">•</span>
-            <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+            <a href="https://www.linkedin.com/in/chakalipavankumar" target="_blank">LinkedIn</a>
           </div>
           <p>This message was securely dispatched from your portfolio serverless api backend.</p>
         </div>
@@ -434,21 +434,59 @@ app.use(express.json());
 const DEFAULT_PROJECTS = [
   {
     _id: 'fallback-1',
-    title: 'Full-Stack MERN Application',
+    title: 'IntelliHire AI – AI-Powered Hiring Platform',
     description:
-      'End-to-end web application built with MongoDB, Express.js, React, and Node.js. Features RESTful APIs, state management, routing, and a dynamic component-based UI.',
-    techStack: ['MongoDB', 'Express.js', 'React', 'Node.js'],
+      'Built and deployed a web application that applies AI to hiring and career workflows, featuring a responsive, user-focused interface live on Render. Combines front-end development, API integration, and cloud deployment in a production-style application.',
+    techStack: ['React.js', 'AI Integration', 'REST APIs', 'Node.js', 'Render'],
+    category: 'AI',
     githubUrl: 'https://github.com/PavankumarCH22',
+    liveUrl: 'https://intellihire-frontend-qrtq.onrender.com',
     featured: true,
+    setup: 'npm install && npm run build',
+    architecture: 'Responsive React front end integrated with AI-assisted hiring & career workflow APIs deployed on Render.',
+    learnings: 'Combined AI workflow integration, responsive UI design, and end-to-end cloud deployment for production readiness.',
   },
   {
     _id: 'fallback-2',
-    title: 'Personal Portfolio',
+    title: 'Kandanavolu Paakashala – Catering Business Website',
     description:
-      'Responsive portfolio website showcasing projects and skills. Built with MongoDB, Express.js, React, and Node.js. Deployed on Vercel with smooth animations, dark space theme, and high-performance serverless endpoints.',
-    techStack: ['MongoDB', 'Express.js', 'React', 'Node.js'],
+      'Designed and deployed a production website for a real catering business in Kurnool, Andhra Pradesh, serving active customers. Features multi-language support (English, Telugu, Hindi), a booking system with form validation, WhatsApp API integration, and an admin dashboard for bookings and inquiries.',
+    techStack: ['HTML5', 'CSS3', 'JavaScript', 'Firebase', 'WhatsApp API'],
+    category: 'Client Work',
     githubUrl: 'https://github.com/PavankumarCH22',
+    liveUrl: '',
     featured: true,
+    setup: 'firebase deploy',
+    architecture: 'Firebase-backed production business site with multi-language localization, WhatsApp API triggers, and a real-time booking admin dashboard.',
+    learnings: 'Shipped a live client product handling real customer bookings, trilingual content, form validation, and business operations.',
+  },
+  {
+    _id: 'fallback-3',
+    title: 'Full-Stack Web Application – MERN Stack',
+    description:
+      'Independently built an end-to-end MERN web application featuring REST APIs with routing, middleware, and error handling in Express.js, paired with a React.js front end with client-side routing and MongoDB CRUD operations.',
+    techStack: ['MongoDB', 'Express.js', 'React.js', 'Node.js'],
+    category: 'MERN',
+    githubUrl: 'https://github.com/PavankumarCH22',
+    liveUrl: '',
+    featured: false,
+    setup: 'npm run install:all && npm run dev',
+    architecture: 'Full-stack MERN architecture with Express REST controllers, middleware error handling, MongoDB schema models, and React Router.',
+    learnings: 'Engineered scalable CRUD endpoints, clean error-handling middleware, and smooth client-server state synchronization.',
+  },
+  {
+    _id: 'fallback-4',
+    title: 'Personal Portfolio Website',
+    description:
+      'Built and deployed a responsive developer portfolio showcasing experience, projects, and skills using modern CSS layouts, React, and serverless Node.js endpoints on Vercel.',
+    techStack: ['React.js', 'HTML5', 'CSS3', 'JavaScript', 'Vercel'],
+    category: 'MERN',
+    githubUrl: 'https://github.com/PavankumarCH22/portfolio-',
+    liveUrl: 'https://pavankumarchakali.vercel.app',
+    featured: false,
+    setup: 'cd client && npm install && npm run build',
+    architecture: 'Vercel monorepo serving static Vite-built React assets alongside Express serverless API routes.',
+    learnings: 'Crafted responsive CSS Flexbox/Grid layouts, interactive UI micro-animations, and serverless contact email delivery.',
   },
 ];
 
@@ -471,7 +509,7 @@ app.post('/api/seed', (req, res) => {
 
 app.post('/api/contact', async (req, res) => {
   try {
-    const { name, email, message } = req.body;
+    const { name, phone, email, message } = req.body;
     if (!name || !email || !message) {
       return res.status(400).json({ success: false, error: 'All fields are required.' });
     }
@@ -479,6 +517,7 @@ app.post('/api/contact', async (req, res) => {
     const msg = {
       _id: `msg-${Date.now()}`,
       name,
+      phone: phone || '',
       email,
       message,
       createdAt: new Date(),
@@ -488,7 +527,8 @@ app.post('/api/contact', async (req, res) => {
     // Send email using engines
     let emailStatus = 'simulated';
     try {
-      emailStatus = await sendContactEmail(name, email, message);
+      const fullMessage = phone ? `Phone: ${phone}\n\n${message}` : message;
+      emailStatus = await sendContactEmail(name, email, fullMessage);
     } catch (err) {
       console.error('Email notification failed to send:', err);
       emailStatus = 'failed';

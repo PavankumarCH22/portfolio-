@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Mail, Github, MapPin, Send, AlertCircle, CheckCircle, X } from 'lucide-react';
+import { Mail, Phone, Github, Linkedin, MapPin, Send, AlertCircle, CheckCircle, X } from 'lucide-react';
 import './Contact.css';
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [form, setForm] = useState({ name: '', phone: '', email: '', message: '' });
   const [status, setStatus] = useState('idle'); // idle | loading | success | error
-  const [focusState, setFocusState] = useState({ name: false, email: false, message: false });
+  const [focusState, setFocusState] = useState({ name: false, phone: false, email: false, message: false });
   const [toast, setToast] = useState({ show: false, message: '', type: 'success' });
 
   const handleChange = e => {
@@ -54,8 +54,8 @@ export default function Contact() {
           triggerToast('Message sent successfully! I will get back to you soon.', 'success');
         }
         
-        setForm({ name: '', email: '', message: '' });
-        setFocusState({ name: false, email: false, message: false });
+        setForm({ name: '', phone: '', email: '', message: '' });
+        setFocusState({ name: false, phone: false, email: false, message: false });
         setTimeout(() => setStatus('idle'), 5000);
       } else {
         setStatus('error');
@@ -71,11 +71,11 @@ export default function Contact() {
     <section className="section contact" id="contact">
       <div className="container">
         <div className="contact__grid">
-          <div className="contact__info animate-fadeUp">
+          <div className="contact__info" data-reveal="fade-right">
             <p className="section-label">Contact</p>
             <h2 className="section-title">Let's build something together.</h2>
             <p className="contact__text">
-              I am actively seeking software engineering internships and junior developer roles. Whether you have an opportunity, a project concept, or just want to talk tech — my inbox is open!
+              I am actively seeking Front-End and Full-Stack Developer roles. Whether you have an opportunity, a project concept, or just want to talk tech — my inbox is open!
             </p>
 
             <div className="contact__details">
@@ -86,6 +86,24 @@ export default function Contact() {
                 <div>
                   <span className="contact__detail-label">Email</span>
                   <span className="contact__detail-value">pavankumarch326@gmail.com</span>
+                </div>
+              </a>
+              <a href="tel:+919346153494" className="contact__detail glass-panel">
+                <div className="contact__detail-icon-wrapper contact__detail-icon-wrapper--phone">
+                  <Phone size={18} />
+                </div>
+                <div>
+                  <span className="contact__detail-label">Phone</span>
+                  <span className="contact__detail-value">+91-9346153494</span>
+                </div>
+              </a>
+              <a href="https://www.linkedin.com/in/chakalipavankumar" target="_blank" rel="noreferrer" className="contact__detail glass-panel">
+                <div className="contact__detail-icon-wrapper contact__detail-icon-wrapper--linkedin">
+                  <Linkedin size={18} />
+                </div>
+                <div>
+                  <span className="contact__detail-label">LinkedIn</span>
+                  <span className="contact__detail-value">linkedin.com/in/chakalipavankumar</span>
                 </div>
               </a>
               <a href="https://github.com/PavankumarCH22" target="_blank" rel="noreferrer" className="contact__detail glass-panel">
@@ -103,39 +121,53 @@ export default function Contact() {
                 </div>
                 <div>
                   <span className="contact__detail-label">Location</span>
-                  <span className="contact__detail-value">Visakhapatnam, India</span>
+                  <span className="contact__detail-value">Visakhapatnam, Andhra Pradesh, India</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="contact__form-wrapper glass-panel animate-fadeUp delay-1">
+          <div className="contact__form-wrapper glass-panel" data-reveal="fade-left" data-reveal-delay="120">
             <div className="contact__form-header">
               <h3>Drop me a message</h3>
               <p>Direct communication to my developer inbox</p>
             </div>
             
-            <div className={`form-group ${focusState.name ? 'form-group--active' : ''}`}>
-              <label htmlFor="name" className="floating-label">Name</label>
+            <div className="form-group">
+              <label htmlFor="name" className="contact-field-label">Your Name *</label>
               <input
                 id="name"
                 name="name"
                 type="text"
-                placeholder=""
+                placeholder="Enter your full name"
                 value={form.name}
                 onFocus={() => handleFocus('name')}
                 onBlur={() => handleBlur('name')}
                 onChange={handleChange}
               />
             </div>
+
+            <div className="form-group">
+              <label htmlFor="phone" className="contact-field-label">Phone Number (Optional)</label>
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                placeholder="Enter your phone number (e.g. +91 98765 43210)"
+                value={form.phone}
+                onFocus={() => handleFocus('phone')}
+                onBlur={() => handleBlur('phone')}
+                onChange={handleChange}
+              />
+            </div>
             
-            <div className={`form-group ${focusState.email ? 'form-group--active' : ''}`}>
-              <label htmlFor="email" className="floating-label">Email</label>
+            <div className="form-group">
+              <label htmlFor="email" className="contact-field-label">Email Address *</label>
               <input
                 id="email"
                 name="email"
                 type="email"
-                placeholder=""
+                placeholder="Enter your email address (e.g. you@example.com)"
                 value={form.email}
                 onFocus={() => handleFocus('email')}
                 onBlur={() => handleBlur('email')}
@@ -143,13 +175,13 @@ export default function Contact() {
               />
             </div>
             
-            <div className={`form-group ${focusState.message ? 'form-group--active' : ''}`}>
-              <label htmlFor="message" className="floating-label">Message</label>
+            <div className="form-group">
+              <label htmlFor="message" className="contact-field-label">Your Message *</label>
               <textarea
                 id="message"
                 name="message"
                 rows={5}
-                placeholder=""
+                placeholder="Type your message, job opportunity, or project idea here..."
                 value={form.message}
                 onFocus={() => handleFocus('message')}
                 onBlur={() => handleBlur('message')}

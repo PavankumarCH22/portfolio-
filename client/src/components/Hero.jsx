@@ -12,14 +12,14 @@ export default function Hero() {
 
   const runCodeLogs = [
     { text: 'initializing developer environment...', delay: 400 },
-    { text: 'loading tech stack dependencies...', delay: 800 },
-    { text: 'connecting to database: mongodb://localhost:27017/portfolio...', delay: 1200 },
-    { text: 'status: MERN backend connected successfully ✓', delay: 1600 },
-    { text: 'compiling portfolio assets with Vite...', delay: 2000 },
-    { text: 'success: dev server running at http://localhost:5173', delay: 2400 },
-    { text: '> pavan.status: "actively building beautiful web apps! 🚀"', delay: 2800 },
+    { text: 'loading tech stack: React.js, Next.js, TypeScript, Node.js, MongoDB...', delay: 800 },
+    { text: 'loading production builds: IntelliHire AI & Kandanavolu Paakashala...', delay: 1200 },
+    { text: 'status: MERN backend & cloud deployments verified ✓', delay: 1600 },
+    { text: 'loading experience: Full Stack Development Intern @ Thiranex...', delay: 2000 },
+    { text: 'success: portfolio live at https://pavankumarchakali.vercel.app', delay: 2400 },
+    { text: '> pavan.status: "Seeking Front-End or Full-Stack Developer roles 🚀"', delay: 2800 },
     { text: '> pavan.location: "Visakhapatnam, Andhra Pradesh, India 📍"', delay: 3200 },
-    { text: '> pavan.message: "Let\'s collaborate! Drop me an email: pavankumarch326@gmail.com"', delay: 3600 }
+    { text: '> pavan.message: "Let\'s collaborate! Email: pavankumarch326@gmail.com"', delay: 3600 }
   ];
 
   const handleRunCode = () => {
@@ -55,16 +55,16 @@ export default function Hero() {
         <div className="hero__content">
           <div className="hero__badge animate-fadeUp">
             <span className="hero__status-dot" />
-            Available for developer roles
+            Open to Front-End & Full-Stack roles
           </div>
 
           <h1 className="hero__title animate-fadeUp delay-1">
             Hi, I'm <span className="hero__title--gradient">Pavan Kumar</span><br />
-            <span className="hero__title--accent">MERN Stack</span> Developer.
+            <span className="hero__title--accent">Front-End & MERN</span> Developer.
           </h1>
 
           <p className="hero__sub animate-fadeUp delay-2">
-            A B.Tech Artificial Intelligence student from Visakhapatnam, India. I specialize in crafting robust full-stack web applications and exploring intelligence models.
+            B.Tech AI & Computer Science student from Visakhapatnam, India. Experienced in building and deploying production web applications with React, Next.js, TypeScript, and the MERN stack — from AI-powered hiring platforms to live business websites.
           </p>
 
           <div className="hero__actions animate-fadeUp delay-3">
@@ -80,9 +80,26 @@ export default function Hero() {
           </div>
 
           <div className="hero__stack animate-fadeUp delay-4">
-            {['React.js', 'Node.js', 'Express.js', 'MongoDB', 'AI/ML'].map(t => (
+            {['React.js', 'Next.js', 'TypeScript', 'Node.js', 'Express.js', 'MongoDB'].map(t => (
               <span key={t} className="hero__tag">{t}</span>
             ))}
+          </div>
+
+          <div className="hero__metrics animate-fadeUp delay-5">
+            <div className="hero__metric">
+              <span className="hero__metric-val">4+</span>
+              <span className="hero__metric-label">Deployed Projects</span>
+            </div>
+            <div className="hero__metric-divider" />
+            <div className="hero__metric">
+              <span className="hero__metric-val">Thiranex</span>
+              <span className="hero__metric-label">Full-Stack Intern</span>
+            </div>
+            <div className="hero__metric-divider" />
+            <div className="hero__metric">
+              <span className="hero__metric-val">MERN + AI</span>
+              <span className="hero__metric-label">B.Tech CSE (AI)</span>
+            </div>
           </div>
         </div>
 
@@ -117,13 +134,14 @@ export default function Hero() {
                   <pre>
                     <code>
 <span className="k">const</span> pavan <span className="o">=</span> &#123;<br />
-&nbsp;&nbsp;role<span className="o">:</span> <span className="s">"Full-Stack MERN Developer"</span>,<br />
-&nbsp;&nbsp;education<span className="o">:</span> <span className="s">"B.Tech in Artificial Intelligence"</span>,<br />
+&nbsp;&nbsp;role<span className="o">:</span> <span className="s">"Front-End & Full-Stack MERN Developer"</span>,<br />
+&nbsp;&nbsp;education<span className="o">:</span> <span className="s">"B.Tech AI & CSE (PIET, 2023–2027)"</span>,<br />
+&nbsp;&nbsp;experience<span className="o">:</span> <span className="s">"Full Stack Intern @ Thiranex"</span>,<br />
 &nbsp;&nbsp;location<span className="o">:</span> <span className="s">"Visakhapatnam, IN"</span>,<br />
 &nbsp;&nbsp;skills<span className="o">:</span> [<br />
-&nbsp;&nbsp;&nbsp;&nbsp;<span className="s">"React"</span>, <span className="s">"Node"</span>, <span className="s">"Express"</span>, <span className="s">"MongoDB"</span><br />
+&nbsp;&nbsp;&nbsp;&nbsp;<span className="s">"React"</span>, <span className="s">"Next.js"</span>, <span className="s">"TypeScript"</span>, <span className="s">"Node"</span>, <span className="s">"MongoDB"</span><br />
 &nbsp;&nbsp;],<br />
-&nbsp;&nbsp;status<span className="o">:</span> <span className="s">"Open to new opportunities 🚀"</span><br />
+&nbsp;&nbsp;status<span className="o">:</span> <span className="s">"Seeking Front-End / Full-Stack roles 🚀"</span><br />
 &#125;;<br />
 <br />
 <span className="c">// Click run to compile and run developer instance</span><br />

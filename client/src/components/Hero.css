@@ -1,11 +1,12 @@
 .hero {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
   overflow: hidden;
-  padding: 8rem 0 5rem;
+  padding: 7.5rem 0 4.5rem;
 }
 
 /* ── Glow Blobs ── */
@@ -19,18 +20,18 @@
 }
 
 .hero__glow--1 {
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(124, 77, 255, 0.18) 0%, transparent 70%);
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.14) 0%, transparent 70%);
   top: -150px;
   left: -100px;
   animation: float 8s ease-in-out infinite alternate;
 }
 
 .hero__glow--2 {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(0, 230, 118, 0.08) 0%, transparent 70%);
+  width: 380px;
+  height: 380px;
+  background: radial-gradient(circle, rgba(255, 107, 0, 0.1) 0%, transparent 70%);
   bottom: 10%;
   right: 15%;
   animation: float 10s ease-in-out infinite alternate-reverse;
@@ -39,7 +40,7 @@
 .hero__glow--3 {
   width: 300px;
   height: 300px;
-  background: radial-gradient(circle, rgba(255, 64, 129, 0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 42, 95, 0.08) 0%, transparent 70%);
   top: 40%;
   left: 45%;
 }
@@ -156,7 +157,47 @@
 
 .hero__tag:hover {
   background: rgba(124, 77, 255, 0.15);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(124, 77, 255, 0.2);
+}
+
+/* ── Experienced Engineer Metrics Strip ── */
+.hero__metrics {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding: 0.9rem 1.35rem;
+  border-radius: var(--radius);
+  background: rgba(13, 13, 25, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+}
+
+.hero__metric {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.hero__metric-val {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.hero__metric-label {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+}
+
+.hero__metric-divider {
+  width: 1px;
+  height: 28px;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 /* ── Interactive VS Code Terminal ── */
@@ -169,11 +210,13 @@
   overflow: hidden;
   transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.5s;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  animation: floatSubtle 6s ease-in-out 0.8s infinite;
 }
 
 .hero__terminal:hover {
-  transform: translateY(-4px) rotateX(1deg) rotateY(-1deg);
-  box-shadow: 0 30px 60px rgba(124, 77, 255, 0.15), 0 0 0 1px rgba(124, 77, 255, 0.2);
+  animation-play-state: paused;
+  transform: translateY(-6px) rotateX(1.5deg) rotateY(-1.5deg);
+  box-shadow: 0 30px 60px rgba(124, 77, 255, 0.2), 0 0 0 1px rgba(124, 77, 255, 0.25);
 }
 
 .terminal__header {
@@ -453,8 +496,10 @@
 
 .hero__scroll-line {
   height: 50px;
-  width: 1px;
-  background: linear-gradient(to bottom, var(--text-muted), transparent);
+  width: 2px;
+  background: linear-gradient(to bottom, var(--accent-light), var(--green), transparent);
+  border-radius: 99px;
+  animation: scrollLinePulse 2.2s ease-in-out infinite;
 }
 
 @media (max-width: 968px) {
@@ -477,6 +522,11 @@
     justify-content: center;
   }
 
+  .hero__metrics {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .hero__terminal-wrapper {
     max-width: 550px;
     margin: 0 auto;
@@ -489,6 +539,22 @@
 }
 
 @media (max-width: 480px) {
+  .hero {
+    padding: 5.75rem 0 3rem;
+  }
+  .hero__metrics {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 0.75rem;
+    padding: 0.85rem 0.9rem;
+  }
+  .hero__metric-divider {
+    display: none;
+  }
+  .hero__metric-val {
+    font-size: 0.92rem;
+  }
   .hero__actions {
     flex-direction: column;
   }
